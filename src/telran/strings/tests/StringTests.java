@@ -1,78 +1,92 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package telran.strings.tests;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class StringTests {
+class StringTest {
 
+	@Test
+	void charAtTest() {
+		String str = "Hello";
+		assertEquals('H', str.charAt(0));
+		assertEquals('o', str.charAt(4));
+		assertEquals('l',str.charAt(2));
+		assertEquals('c', 'e' - 2);
+		assertEquals("Hello2", str + 2);
+	}
+	@Test
+	void containsTest() {
+		String str = "Hello";
+		assertTrue(str.contains("H"));
+		assertFalse(str.contains("h"));
+		assertTrue(str.contains("ello"));
+		assertFalse(str.contains("lelo"));
+	}
 	@Test
 	void compareToTest() {
-		String str = "hello";
-		assertEquals(0, str.compareTo("hello"));
-		assertEquals(-3, str.compareTo("helo"));
-		assertEquals(-1, str.compareTo("helloo"));
+		assertEquals(8, "9".compareTo("12345"));
+		assertEquals(-4, "12345".compareTo("12349"));
+		assertEquals(1, "123459".compareTo("12345"));
+		assertEquals(0, "Hello".compareTo("Hello"));
+		assertEquals('H' - 'h', "Hello".compareTo("hello"));
+		assertTrue("Hello".compareTo("hello") < 0);
 	}
-
 	@Test
-	void compareToIgnoreCaseTest() {
-		String str = "hello";
-		assertEquals(0, str.compareToIgnoreCase("HeLlO"));
-		assertEquals(-3, str.compareToIgnoreCase("Helo"));
-		assertEquals(-1, str.compareToIgnoreCase("Helloo"));
-
+	void testCompareToIgnoreCase() {
+		assertEquals(8, "9".compareToIgnoreCase("12345"));
+		assertEquals(-4, "12345".compareToIgnoreCase("12349"));
+		assertEquals(2, "12345yu".compareToIgnoreCase("12345"));
+		assertEquals(0, "Hello".compareToIgnoreCase("HeLlO"));
+		assertEquals(0, "Hello".compareToIgnoreCase("hello"));
+		
+		
 	}
-
 	@Test
-	void concatTest() {
-		String str1 = "hello1";
-		String str2 = "hello2";
-		String str3 = "hello1hello2;";
-		assertTrue(str3.contains(str1.concat(str2)));
-		assertEquals("hello1hello2", str1.concat(str2));
-
+	void testStartWith() {
+		String hello = "Hello";
+		assertTrue (hello.startsWith("He"));
+		assertFalse(hello.startsWith("he"));
 	}
-
 	@Test
-	void startsWithTest() {
-		String str = "hello";
-		assertTrue(str.startsWith("h"));
-		assertTrue(str.startsWith("he"));
-		assertFalse(str.startsWith("H"));
+	void testEndWith() {
+		String hello = "Hello";
+		assertTrue (hello.endsWith("lo"));
+		assertFalse(hello.endsWith("LO"));
 	}
-
 	@Test
-	void endsWithTest() {
-		String str = "hello";
-		assertTrue(str.endsWith("o"));
-		assertTrue(str.endsWith("lo"));
-		assertFalse(str.endsWith("H"));
+	void testIndexOf() {
+		//tested method indexOf(String str)
+		String hello = "Hello";
+		assertEquals(0, hello.indexOf("He"));
+		assertEquals(2, hello.indexOf("llo"));
+		assertEquals(4, hello.indexOf("o"));
 	}
-
 	@Test
-	void equalsIgnoreCaseTest() {
-		String str = "hello";
-		assertTrue(str.equalsIgnoreCase("HELLO"));
-		assertTrue(str.equalsIgnoreCase("hello"));
-		assertFalse(str.equalsIgnoreCase("hella"));
-		assertEquals(true, str.equalsIgnoreCase("hello"));
-
+	void testLastIndexOf() {
+		//tested method lastIndexOf(int ch)
+		String hello = "HHellooo";
+		assertEquals(1, hello.lastIndexOf('H'));
+		assertEquals(4, hello.lastIndexOf('l'));
+		assertEquals(7, hello.lastIndexOf('o'));
 	}
-
 	@Test
-	void indexOfTest() {
-		String str = "hello";
-		assertEquals(4, str.indexOf("o"));
-		assertTrue(4 == (str.indexOf("o")));
-		assertTrue(4 != (str.indexOf("t")));
-		assertFalse(4 == (str.indexOf("t")));
+	void equalsIgnoreCase() {
+		String hello = "Hello";
+		assertTrue(hello.equalsIgnoreCase("hElLO"));
+		assertFalse(hello.equalsIgnoreCase("Hlelo"));
+		
+	}
+	@Test
+	void testConcat() {
+		
+		String hello = "Hello";
+		String world = " World";
+		String helloWorld = "Hello World";
+		hello.concat(world);
+		assertEquals(helloWorld, hello.concat(world));
+		assertEquals("Hello World!", helloWorld.concat("!"));
+		assertNotEquals(hello, helloWorld);
 	}
 
-	@Test
-	void lastIndexOfTest() {
-		String str = "hello";
-		assertEquals(3, str.lastIndexOf("l"));
-		assertTrue(3 == str.lastIndexOf("l"));
-		assertFalse(3 != str.lastIndexOf("l"));
-	}
 }
